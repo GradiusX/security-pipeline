@@ -1,0 +1,10 @@
+name: 'Security Pipeline'
+description: 'Run several security tools on the project'
+inputs:
+  severity-level:
+    description: 'Min Severity Level to Report'
+    required: true
+    default: 'critical'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
