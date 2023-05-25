@@ -6,6 +6,10 @@ on:
       continue-on-error:
         required: true
         type: boolean
+      severity-level:
+        required: true
+        type: string
+        default: "critical"
 
 jobs:
   security-pipeline:
@@ -17,4 +21,4 @@ jobs:
         id: yarn_audit
         continue-on-error: ${{ inputs.continue-on-error }}
         run: |
-          yarn audit --level critical
+          yarn audit --level ${{ inputs.security-level }}
