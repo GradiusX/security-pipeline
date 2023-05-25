@@ -6,6 +6,7 @@ on:
       continue-on-error:
         required: true
         type: boolean
+        default: false
       severity-level:
         required: true
         type: string
