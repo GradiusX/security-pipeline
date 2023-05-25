@@ -19,7 +19,12 @@ jobs:
     steps:  
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Running Yarn Audit on Repo
-        id: yarn_audit
+      - name: Running Yarn Audit on Repo - direct
+        id: yarn_audit_direct
         run: |
           yarn audit --level ${{ inputs.severity-level }}
+      - name: Running Yarn Audit on Repo - indirect
+        id: yarn_audit_indirect
+        uses: ../action.yml
+        with:
+          severity-level: "critical"
