@@ -26,6 +26,6 @@ jobs:
           yarn audit --level ${{ inputs.severity-level }}
       - name: Running Yarn Audit on Repo - indirect
         id: yarn_audit_indirect
-        uses: ./action.yml
+        uses: ./.github/actions/action.yml
         with:
           severity-level: "critical"
