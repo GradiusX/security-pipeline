@@ -21,4 +21,4 @@ jobs:
         id: yarn_audit
         continue-on-error: ${{ inputs.continue-on-error }}
         run: |
-          yarn audit --level ${{ inputs.security-level }}
+          yarn audit --level ${{ inputs.severity-level }}
