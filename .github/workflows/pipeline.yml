@@ -1,0 +1,20 @@
+name: Security Pipeline Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      continue-on-error:
+        required: true
+        type: boolean
+
+jobs:
+  security-pipeline:
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Running Yarn Audit on Repo
+        id: yarn_audit
+        continue-on-error: ${{ inputs.continue-on-error }}
+        run: |
+          yarn audit --level critical
