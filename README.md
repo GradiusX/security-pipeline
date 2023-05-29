@@ -1,4 +1,4 @@
-# Security Pipeline Reusable Workflow
+# Security Pipeline Reusable Workflow!
 
 ## Example usage
 
