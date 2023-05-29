@@ -15,5 +15,5 @@ jobs:
       # true = do not break pipeline; false = break pipeline
       continue-on-error: false
       # Report only this level and above (info|low|moderate|high|critical)
-      severity-level: "high"
+      severity-level: "critical"
 ```
