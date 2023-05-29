@@ -1,4 +1,4 @@
-# Security Pipeline Reusable Workflow
+# Security Pipeline Reusable Workflow v1.0
 
 ## Example usage
 
@@ -10,7 +10,7 @@ on:
     branches: [main]
 jobs:
   Security-Pipeline:
-    uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@main
+    uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@v1.0
     with:
       # true = do not break pipeline; false = break pipeline
       continue-on-error: false
