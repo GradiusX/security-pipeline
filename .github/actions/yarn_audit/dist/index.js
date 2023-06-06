@@ -11126,9 +11126,13 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         //cwd : './test'
     }
     const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
-    console.log(exitCode);
-    console.log("-----");
-    console.log(commandOutput);
+
+    if (exitCode > severityLevelNum){
+        console.log(commandOutput);
+    }
+    else{
+        console.log("All good here!!")
+    }
 
     // try{
     //     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
