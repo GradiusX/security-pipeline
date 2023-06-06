@@ -31,11 +31,16 @@ jobs:
       - name: Check existence of yarn.lock
         id: check_yarn_lock
         run: |
-          if test -f "yarn.lock"; then exit 1; else exit 0; fi
+          if test -f "yarn.lock"; 
+          then 
+            echo "check_result=true" >> $GITHUB_OUTPUT
+          else 
+            echo "check_result=false" >> $GITHUB_OUTPUT 
+          fi
 
       - name: Running Yarn Audit on Repo - indirect
+        if: steps.check_yarn_lock.outputs.check_result == 'true'
         id: yarn_audit_indirect
-        if: steps.check_yarn_lock.outputs == 0
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
