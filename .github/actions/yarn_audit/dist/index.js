@@ -11128,7 +11128,8 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
 
     if (exitCode > severityLevelNum){
-        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(commandOutput);
+        console.log(commandOutput)
+        ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Update the above vulnerable dependencies!");
     }
     else{
         console.log("All good here!!")

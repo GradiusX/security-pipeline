@@ -34,7 +34,8 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
 
     if (exitCode > severityLevelNum){
-        setFailed(commandOutput);
+        console.log(commandOutput)
+        setFailed("Update the above vulnerable dependencies!");
     }
     else{
         console.log("All good here!!")
