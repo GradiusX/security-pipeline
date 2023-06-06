@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 442:
+/***/ 471:
 /***/ ((module) => {
 
 module.exports = eval("require")("@actions/core");
@@ -9,7 +9,7 @@ module.exports = eval("require")("@actions/core");
 
 /***/ }),
 
-/***/ 550:
+/***/ 256:
 /***/ ((module) => {
 
 module.exports = eval("require")("@actions/exec");
@@ -17,7 +17,7 @@ module.exports = eval("require")("@actions/exec");
 
 /***/ }),
 
-/***/ 671:
+/***/ 198:
 /***/ ((module) => {
 
 module.exports = eval("require")("@actions/github");
@@ -66,9 +66,9 @@ module.exports = eval("require")("@actions/github");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(442);
-const github = __nccwpck_require__(671);
-const exec = __nccwpck_require__(550);
+const core = __nccwpck_require__(471);
+const github = __nccwpck_require__(198);
+const exec = __nccwpck_require__(256);
 
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = core.getInput('severity-level');
