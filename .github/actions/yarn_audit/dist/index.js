@@ -11106,8 +11106,7 @@ const severityLevelConst = {
 
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('severity-level');
-console.log(typeof(severityLevel))
-//const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()]
+const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
 (async () => {
     let commandOutput = '';

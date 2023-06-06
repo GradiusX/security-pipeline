@@ -12,8 +12,7 @@ const severityLevelConst = {
 
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = getInput('severity-level');
-console.log(typeof(severityLevel))
-//const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()]
+const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
 (async () => {
     let commandOutput = '';
