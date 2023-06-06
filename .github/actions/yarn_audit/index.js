@@ -31,7 +31,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         ignoreReturnCode: true
         //cwd : './test'
     }
-    const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
+    const exitCode = await _exec('yarn', ['--group','dependencies','audit', '--level', severityLevel], options);
 
     if (exitCode >= severityLevelNum){
         console.log(commandOutput)
