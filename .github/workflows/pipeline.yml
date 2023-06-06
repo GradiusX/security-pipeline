@@ -30,7 +30,7 @@ jobs:
         #   path: app
       - name: Running Yarn Audit on Repo - indirect
         id: yarn_audit_indirect
-        uses: GradiusX/security-pipeline/.github/actions/yarn/action.yml
+        uses: GradiusX/security-pipeline/.github/actions/yarn/action.yml@main
         with:
           severity-level: ${{ inputs.severity-level }}
       # Tutorial for calling workflow actions: https://stackoverflow.com/questions/71046096/reusable-workflows-with-local-actions
