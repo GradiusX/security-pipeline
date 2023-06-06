@@ -27,10 +27,15 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v3
-        # with:
-        #   path: app
+
+      - name: Check existance of yarn.lock
+        id: check_yarn_lock
+        run: |
+          if test -f "yarn.lock"; then return 0; else return 1; fi
+
       - name: Running Yarn Audit on Repo - indirect
         id: yarn_audit_indirect
+        if: steps.check_yarn_lock.outputs == 0
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
