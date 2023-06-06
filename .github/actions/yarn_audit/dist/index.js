@@ -11096,8 +11096,17 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 
+const severityLevelConst = {
+    INFO        : 1,
+    LOW         : 2,
+    MODERATE    : 4,
+    HIGH        : 8,
+    CRITICAL    :16
+}
+
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('severity-level');
+const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()]
 
 (async () => {
     let commandOutput = '';
@@ -11116,11 +11125,14 @@ const severityLevel = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('s
         //ignoreReturnCode: true,
         //cwd : './test'
     }
+    var exitCode = 0;
     try{
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
+        exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
         console.log("No Security Issues found")
     }catch(error){
         console.log(commandOutput)
+        console.log(exitCode)
+        console.log(error.exitCode)
         ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message)
     }
 })();
