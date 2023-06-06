@@ -39,15 +39,8 @@ jobs:
           fi
 
       - name: Running Yarn Audit on Repo
-        if: steps.check_yarn_lock.outputs.check_result == 'false'
+        if: steps.check_yarn_lock.outputs.check_result == 'true'
         id: yarn_audit
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
-
-      - name: testingasdfdsfdsaf
-        id: blubluasdfsdafdsf
-        run: |
-          echo ${{ github.action_repository}} 
-          echo ${{ github.repository }}
-          echo ${{ github.action_path }}
