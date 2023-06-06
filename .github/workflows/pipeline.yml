@@ -8,6 +8,7 @@ on:
         type: boolean
         default: false
       severity-level:
+        description: 'Min Severity Level to Report'
         required: true
         type: string
         default: "critical"
