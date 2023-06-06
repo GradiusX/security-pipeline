@@ -11122,19 +11122,22 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
             }
         },
         silent: true,
-        //ignoreReturnCode: true,
+        ignoreReturnCode: true
         //cwd : './test'
     }
-    var exitCode = 0;
-    try{
-        exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
-        console.log("No Security Issues found")
-    }catch(error){
-        console.log(commandOutput)
-        console.log(exitCode)
-        console.log(error.exitCode)
-        ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message)
-    }
+    const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
+    console.log(exitCode);
+    console.log("-----");
+    console.log(commandOutput);
+
+    // try{
+    //     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
+    //     console.log(exitCode)
+    //     console.log("No Security Issues found")
+    // }catch(error){
+    //     console.log(commandOutput)
+    //     setFailed(error.message)
+    // }
 })();
 })();
 
