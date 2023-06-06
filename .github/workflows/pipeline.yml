@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Running Yarn Audit on Repo - indirect
-        if: steps.check_yarn_lock.outputs.check_result == 'true'
+        if: steps.check_yarn_lock.outputs.check_result == 'false'
         id: yarn_audit_indirect
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
