@@ -11133,15 +11133,6 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     else{
         console.log("All good here!!")
     }
-
-    // try{
-    //     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
-    //     console.log(exitCode)
-    //     console.log("No Security Issues found")
-    // }catch(error){
-    //     console.log(commandOutput)
-    //     setFailed(error.message)
-    // }
 })();
 })();
 
