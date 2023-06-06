@@ -34,7 +34,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
 
     if (exitCode > severityLevelNum){
-        console.log(commandOutput);
+        setFailed(commandOutput);
     }
     else{
         console.log("All good here!!")
