@@ -41,13 +41,14 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         if (err) {
           console.log(err);
         }
-        console.log("Successfully uploaded results to DefectDojo")
+        console.log("successfully wrote yarn_audit.json")
+        //console.log("Successfully uploaded results to DefectDojo")
     });
 
-    //find which GITHUB vars give you repo name
-    //push code to github
-    //try it out
-
+    const a1 = getInput('defectdojo-url');
+    console.log(a1)
+    const a2 = getInput('defectdojo-api-key')
+    console.log(a2)
     console.log(github.repository)
 
     // reset Output and Error and re-run tool for CI/CD output
