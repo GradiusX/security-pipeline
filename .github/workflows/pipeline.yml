@@ -12,19 +12,20 @@ on:
         required: true
         type: string
         default: "critical"
+    secrets:
+      defectdojo-url:
+        description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+        required: true
+      defectdojo-api-key:
+        description: 'API key for Defect Dojo Instance'
+        required: true
+
 
 jobs:
   security-pipeline:
     runs-on: ubuntu-latest
     continue-on-error: ${{ inputs.continue-on-error }}
     steps:  
-      # - name: Check out repository code
-      #   uses: actions/checkout@v3
-      # - name: Running Yarn Audit on Repo - direct
-      #   id: yarn_audit_direct
-      #   run: |
-      #     yarn audit --level ${{ inputs.severity-level }}
-
       - name: Check out repository code
         uses: actions/checkout@v3
 
@@ -44,3 +45,5 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
+          defectdojo-url: ${{ secrets.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
