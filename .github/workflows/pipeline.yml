@@ -12,14 +12,13 @@ on:
         required: true
         type: string
         default: "critical"
+    secrets:
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
         required: true
-        type: string
       defectdojo-api-key:
         description: 'API key for Defect Dojo Instance'
         required: true
-        type: string
 
 
 jobs:
@@ -46,5 +45,5 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
-          defectdojo-url: ${{ inputs.defectdojo-url }}
-          defectdojo-api-key: ${{ inputs.defectdojo-api-key }}
+          defectdojo-url: ${{ secrets.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
