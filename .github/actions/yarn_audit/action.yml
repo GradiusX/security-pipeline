@@ -10,7 +10,6 @@ inputs:
   defectdojo-api-key:
     description: 'API key for Defect Dojo Instance'
     required: true
-
 runs:
   using: 'node16'
   main: 'dist/index.js'
