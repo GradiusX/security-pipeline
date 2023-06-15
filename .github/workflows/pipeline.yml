@@ -41,6 +41,6 @@ jobs:
       - name: Running Yarn Audit on Repo
         if: steps.check_yarn_lock.outputs.check_result == 'true'
         id: yarn_audit
-        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
+        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@v1.1
         with:
           severity-level: ${{ inputs.severity-level }}
