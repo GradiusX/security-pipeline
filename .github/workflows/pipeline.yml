@@ -45,5 +45,5 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
-          defectdojo-url: ${{ secrets.defectdojo-url }}
-          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          # defectdojo-url: ${{ secrets.defectdojo-url }}
+          # defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
