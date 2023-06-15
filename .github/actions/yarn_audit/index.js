@@ -1,5 +1,5 @@
 import { getInput, setFailed } from '@actions/core';
-import { sendToDefectDojo } from '../utils/defectdojo';
+// import { sendToDefectDojo } from '../utils/defectdojo';
 import github from '@actions/github';
 import { exec as _exec } from '@actions/exec';
 const fs = require("fs");
