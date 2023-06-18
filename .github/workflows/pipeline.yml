@@ -45,6 +45,7 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
           severity-level: ${{ inputs.severity-level }}
+          output-filename: "yarn_audit.json"
 
       - name: Uploading Yarn Audit files to DefectDojo
         id: upload_defectdojo_yarn_audit
@@ -53,3 +54,6 @@ jobs:
           defectdojo-url: ${{ secrets.defectdojo-url }}
           defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
           product-name: ${{ github.event.repository.name }}
+          engagement-name: "CICD_engagement"
+          scan-type: "Yarn Audit Scan"
+          scan-filename: "yarn_audit.json"

@@ -4,6 +4,9 @@ inputs:
   severity-level:
     description: 'Min Severity Level to Report'
     required: true
+  output-filename:
+    description: 'File name containing full scan output'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

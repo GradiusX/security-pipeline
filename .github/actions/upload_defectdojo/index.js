@@ -6,11 +6,9 @@ const fs = require("fs");
 const defectDojoURL = getInput('defectdojo-url');
 const defectDojoToken = getInput('defectdojo-api-key');
 const productName = getInput('product-name');
-console.log(productName);
-//////
-const engagementName = "test_ci_cd_engagement";
-const scanType = "Yarn Audit Scan";
-const scanFile = "yarn_audit.json";
+const engagementName = getInput('engagement-name');
+const scanType = getInput('scan-type');
+const scanFile = getInput('scan-filename');
 
 (async () => {
     const options = {

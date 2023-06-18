@@ -7,12 +7,14 @@ const severityLevelConst = {
     LOW         : 2,
     MODERATE    : 4,
     HIGH        : 8,
-    CRITICAL    :16
+    CRITICAL    : 16
 }
 
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = getInput('severity-level');
 const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
+
+const outputFile = getInput('output-filename')
 
 (async () => {
     // Run the tool and upload files to DefectDojo
@@ -34,7 +36,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     }
 
     await _exec('yarn', ['audit', '--json'], options);
-    fs.writeFile('yarn_audit.json', commandOutput, err => {
+    fs.writeFile(outputFile, commandOutput, err => {
         if (err) {
           console.log(err);
         }
