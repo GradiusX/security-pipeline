@@ -11,7 +11,7 @@ const defectDojoToken = getInput('defectdojo-api-key');
 const productName = "test_product_name"
 const engagementName = "test_ci_cd_engagement"
 const scanType = "Yarn Audit Scan"
-const scanfile = "yarn_audit.json"
+const scanFile = "yarn_audit.json"
 
 console.log(github.action_repository)
 

@@ -45017,9 +45017,9 @@ const defectDojoToken = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)(
 const productName = "test_product_name"
 const engagementName = "test_ci_cd_engagement"
 const scanType = "Yarn Audit Scan"
-const scanfile = "yarn_audit.json"
+const scanFile = "yarn_audit.json"
 
-console.log((_actions_github__WEBPACK_IMPORTED_MODULE_1___default().repository))
+console.log((_actions_github__WEBPACK_IMPORTED_MODULE_1___default().action_repository))
 
 (async () => {
     const options = {
