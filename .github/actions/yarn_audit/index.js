@@ -1,5 +1,4 @@
 import { getInput, setFailed } from '@actions/core';
-import github from '@actions/github';
 import { exec as _exec } from '@actions/exec';
 const fs = require("fs");
 

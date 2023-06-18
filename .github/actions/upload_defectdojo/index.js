@@ -1,10 +1,21 @@
+import { getInput, setFailed } from '@actions/core';
+import github from '@actions/github';
 const request = require("request");
 const fs = require("fs");
 
 const defectDojoURL = getInput('defectdojo-url');
 const defectDojoToken = getInput('defectdojo-api-key');
 
-function sendToDefectDojo(productName, engagementName, scanType, scanFile){
+// function sendToDefectDojo(productName, engagementName, scanType, scanFile){
+
+const productName = "test_product_name"
+const engagementName = "test_ci_cd_engagement"
+const scanType = "Yarn Audit Scan"
+const scanfile = "yarn_audit.json"
+
+console.log(github.repository)
+
+(async () => {
     const options = {
         method: "POST",
         url: defectDojoURL.concat('/api/v2/import-scan/'),
@@ -27,12 +38,4 @@ function sendToDefectDojo(productName, engagementName, scanType, scanFile){
         console.log(body);
         console.log("Uploaded Successfully to DefectDojo")
     });
-}
-
-
-
-    // const a1 = getInput('defectdojo-url');
-    // console.log(a1)
-    // const a2 = getInput('defectdojo-api-key')
-    // console.log(a2)
-    // console.log(github.repository)
+})();
