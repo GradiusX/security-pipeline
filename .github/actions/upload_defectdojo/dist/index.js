@@ -45011,7 +45011,7 @@ const fs = __nccwpck_require__(7147);
 
 const defectDojoURL = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-url');
 const defectDojoToken = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-api-key');
-const projectName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('product-name');
+const productName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('product-name');
 //////
 const engagementName = "test_ci_cd_engagement";
 const scanType = "Yarn Audit Scan";
