@@ -42,6 +42,14 @@ jobs:
       - name: Running Yarn Audit on Repo
         if: steps.check_yarn_lock.outputs.check_result == 'true'
         id: yarn_audit
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # THIS CANNOT BE MAIN ANYMORE ELSE WE CAN'T TEST AND STUFF - maybe it has to be downloaded locally
+        # OR ANOTHER OPTION WOULD BE TO HAVE A PRODUCTION BRANCH @PRODUCTION for example or @release
+        # OR ANOTHER OPTION IS TO USE MAIN AS PRODUCTION AND CREATE A TESTING BRANCH
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
