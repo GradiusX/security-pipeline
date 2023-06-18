@@ -30,5 +30,9 @@ function sendToDefectDojo(productName, engagementName, scanType, scanFile){
 }
 
 
-// exported functions
-module.exports = { sendToDefectDojo };
+
+    // const a1 = getInput('defectdojo-url');
+    // console.log(a1)
+    // const a2 = getInput('defectdojo-api-key')
+    // console.log(a2)
+    // console.log(github.repository)

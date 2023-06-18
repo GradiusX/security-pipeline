@@ -1,0 +1,12 @@
+name: 'Upload DefectDojo'
+description: 'Uploads results to DefectDojo'
+inputs:
+  defectdojo-url:
+    description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+    required: true
+  defectdojo-api-key:
+    description: 'API key for Defect Dojo Instance'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

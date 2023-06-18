@@ -45,11 +45,10 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
           severity-level: ${{ inputs.severity-level }}
+
+      - name: Uploading Yarn Audit files to DefectDojo
+        id: upload_defectdojo_yarn_audit
+        uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
+        with:
           defectdojo-url: ${{ secrets.defectdojo-url }}
           defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
-
-      - name: list files and display yarn_audit.json
-        id: temp
-        run: |
-          ls -la;
-          cat yarn_audit.json

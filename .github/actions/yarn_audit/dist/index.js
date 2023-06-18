@@ -11093,7 +11093,6 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(6081);
 /* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(_actions_exec__WEBPACK_IMPORTED_MODULE_2__);
 
-// import { sendToDefectDojo } from '../utils/defectdojo';
 
 
 const fs = __nccwpck_require__(7147);
@@ -11137,14 +11136,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         console.log("successfully wrote yarn_audit.json")
     });
 
-    // const a1 = getInput('defectdojo-url');
-    // console.log(a1)
-    // const a2 = getInput('defectdojo-api-key')
-    // console.log(a2)
-    // console.log(github.repository)
-
-
-    // reset Output and Error and re-run tool for CI/CD output
+    // reset Output and Error Streams and re-run tool for CI/CD output
     commandOutput = '';
     commandError = '';
 

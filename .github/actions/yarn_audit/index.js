@@ -1,5 +1,4 @@
 import { getInput, setFailed } from '@actions/core';
-// import { sendToDefectDojo } from '../utils/defectdojo';
 import github from '@actions/github';
 import { exec as _exec } from '@actions/exec';
 const fs = require("fs");
@@ -43,14 +42,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         console.log("successfully wrote yarn_audit.json")
     });
 
-    // const a1 = getInput('defectdojo-url');
-    // console.log(a1)
-    // const a2 = getInput('defectdojo-api-key')
-    // console.log(a2)
-    // console.log(github.repository)
-
-
-    // reset Output and Error and re-run tool for CI/CD output
+    // reset Output and Error Streams and re-run tool for CI/CD output
     commandOutput = '';
     commandError = '';
 
