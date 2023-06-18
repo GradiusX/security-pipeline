@@ -32807,6 +32807,22 @@ function dumpException(ex)
 
 /***/ }),
 
+/***/ 471:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/core");
+
+
+/***/ }),
+
+/***/ 5198:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/github");
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -33152,21 +33168,78 @@ module.exports = JSON.parse('["ac","com.ac","edu.ac","gov.ac","net.ac","mil.ac",
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(471);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5198);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
+
+
 const request = __nccwpck_require__(5465);
 const fs = __nccwpck_require__(7147);
 
-const defectDojoURL = getInput('defectdojo-url');
-const defectDojoToken = getInput('defectdojo-api-key');
+const defectDojoURL = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-url');
+const defectDojoToken = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-api-key');
 
-function sendToDefectDojo(productName, engagementName, scanType, scanFile){
+// function sendToDefectDojo(productName, engagementName, scanType, scanFile){
+
+const productName = "test_product_name"
+const engagementName = "test_ci_cd_engagement"
+const scanType = "Yarn Audit Scan"
+const scanfile = "yarn_audit.json"
+
+console.log((_actions_github__WEBPACK_IMPORTED_MODULE_1___default().repository))
+
+(async () => {
     const options = {
         method: "POST",
         url: defectDojoURL.concat('/api/v2/import-scan/'),
@@ -33189,15 +33262,7 @@ function sendToDefectDojo(productName, engagementName, scanType, scanFile){
         console.log(body);
         console.log("Uploaded Successfully to DefectDojo")
     });
-}
-
-
-
-    // const a1 = getInput('defectdojo-url');
-    // console.log(a1)
-    // const a2 = getInput('defectdojo-api-key')
-    // console.log(a2)
-    // console.log(github.repository)
+})();
 })();
 
 module.exports = __webpack_exports__;
