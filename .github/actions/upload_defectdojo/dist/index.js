@@ -45036,11 +45036,12 @@ const scanFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('scan-f
     
     request(options, function (err, res, body) {
         if(err) console.log(err);
-        console.log(body);
         if (res.statusCode != 200){
-            (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(res.statusCode);
+            console.log(res.statusCode);
+            (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(body);
         }
         else{
+            console.log(body);
             console.log("Uploaded Successfully to DefectDojo");
         }
     });

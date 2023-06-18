@@ -40,7 +40,7 @@ const outputFile = getInput('output-filename');
         if (err) {
           console.log(err);
         }
-        console.log("successfully wrote yarn_audit.json")
+        console.log("Successfully wrote yarn_audit.json")
     });
 
     // reset Output and Error Streams and re-run tool for CI/CD output

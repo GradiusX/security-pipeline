@@ -49,7 +49,6 @@ jobs:
 
       - name: Uploading Yarn Audit files to DefectDojo
         if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-        continue-on-error: true
         id: upload_defectdojo_yarn_audit
         uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
         with:
