@@ -52,4 +52,4 @@ jobs:
         with:
           defectdojo-url: ${{ secrets.defectdojo-url }}
           defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
-          project-name: ${{ github.event.repository.name }}
+          product-name: ${{ github.event.repository.name }}
