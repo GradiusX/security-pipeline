@@ -22,7 +22,7 @@ on:
 
 
 jobs:
-  security-pipeline:
+  nodejs-security-checks:
     runs-on: ubuntu-latest
     continue-on-error: ${{ inputs.continue-on-error }}
     steps:  
@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check existence of yarn.lock
-        id: check_yarn_lock
+        id: check_yarn_lock_file
         run: |
           if test -f "yarn.lock"; 
           then 
@@ -40,7 +40,7 @@ jobs:
           fi
 
       - name: Running Yarn Audit on Repo
-        if: steps.check_yarn_lock.outputs.check_result == 'true'
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
         id: yarn_audit
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
@@ -48,6 +48,8 @@ jobs:
           output-filename: "yarn_audit.json"
 
       - name: Uploading Yarn Audit files to DefectDojo
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+        continue-on-error: true
         id: upload_defectdojo_yarn_audit
         uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
         with:

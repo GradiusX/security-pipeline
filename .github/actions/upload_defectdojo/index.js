@@ -32,7 +32,7 @@ const scanFile = getInput('scan-filename');
         if(err) console.log(err);
         console.log(body);
         if (res.statusCode != 200){
-            console.log(res.statusCode);
+            setFailed(res.statusCode);
         }
         else{
             console.log("Uploaded Successfully to DefectDojo");
