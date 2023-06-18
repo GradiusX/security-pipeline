@@ -16,8 +16,8 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
 const outputFile = getInput('output-filename');
 
+
 (async () => {
-    // Run the tool and upload files to DefectDojo
     let commandOutput = '';
     let commandError = '';
 
@@ -32,27 +32,27 @@ const outputFile = getInput('output-filename');
         },
         silent: true,
         ignoreReturnCode: true
-        //cwd : './test'
     }
 
-    await _exec('yarn', ['audit', '--json'], options);
-    fs.writeFile(outputFile, commandOutput, err => {
-        if (err) {
-          console.log(err);
-        }
-        console.log("Successfully wrote yarn_audit.json")
-    });
-
-    // reset Output and Error Streams and re-run tool for CI/CD output
-    commandOutput = '';
-    commandError = '';
-
-    const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
-    if (exitCode >= severityLevelNum){
-        console.log(commandOutput)
-        setFailed("Update the above vulnerable dependencies!");
+    if ( typeof outputFile !== 'undefined' && outputFile ){
+        // if an output file has been defined, save json output to it
+        await _exec('yarn', ['audit', '--json'], options);
+        fs.writeFile(outputFile, commandOutput, err => {
+            if (err) {
+              console.log(err);
+            }
+            console.log("Successfully wrote yarn_audit.json")
+        });
     }
     else{
-        console.log("All good here!!")
+        // if an output file has NOT been defined, display output
+        const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
+        if (exitCode >= severityLevelNum){
+            console.log(commandOutput)
+            setFailed("Update the above vulnerable dependencies!");
+        }
+        else{
+            console.log("All good here!!")
+        }
     }
 })();

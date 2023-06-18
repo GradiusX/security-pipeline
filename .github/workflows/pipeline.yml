@@ -39,12 +39,11 @@ jobs:
             echo "check_result=false" >> $GITHUB_OUTPUT 
           fi
 
-      - name: Running Yarn Audit on Repo
+      - name: Running Full Yarn Audit on Repo
         if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-        id: yarn_audit
+        id: yarn_audit_full
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
-          severity-level: ${{ inputs.severity-level }}
           output-filename: "yarn_audit.json"
 
       - name: Uploading Yarn Audit files to DefectDojo
@@ -58,3 +57,10 @@ jobs:
           engagement-name: "CICD_engagement"
           scan-type: "Yarn Audit Scan"
           scan-filename: "yarn_audit.json"
+
+      - name: Running Yarn Audit on Repo
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+        id: yarn_audit_specific
+        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
+        with:
+          severity-level: ${{ inputs.severity-level }}
