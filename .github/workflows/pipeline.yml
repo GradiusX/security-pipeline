@@ -60,7 +60,7 @@ jobs:
 
       - name: Running Specific Yarn Audit on Repo
         if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-        continue-on-error: true
+        continue-on-error: ${{ inputs.continue-on-error }}
         id: yarn_audit_specific
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
