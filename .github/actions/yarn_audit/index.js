@@ -33,11 +33,11 @@ const outputFile = getInput('output-filename');
         silent: true,
         ignoreReturnCode: true
     }
-    console.log(outputFile);
 
     if ( typeof outputFile !== 'undefined' && outputFile ){
         // if an output file has been defined, save json output to it
         await _exec('yarn', ['audit', '--json'], options);
+        console.log(commandOutput)
         fs.writeFile(outputFile, commandOutput, err => {
             if (err) {
               console.log(err);
