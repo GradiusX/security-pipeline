@@ -4142,12 +4142,14 @@ const severityLevelConst = {
     LOW         : 2,
     MODERATE    : 4,
     HIGH        : 8,
-    CRITICAL    :16
+    CRITICAL    : 16
 }
 
 // Report only this level and above: info|low|moderate|high|critical
 const severityLevel = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('severity-level');
 const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
+
+const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename')
 
 (async () => {
     // Run the tool and upload files to DefectDojo
@@ -4169,7 +4171,7 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
     }
 
     await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('yarn', ['audit', '--json'], options);
-    fs.writeFile('yarn_audit.json', commandOutput, err => {
+    fs.writeFile(outputFile, commandOutput, err => {
         if (err) {
           console.log(err);
         }

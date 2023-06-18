@@ -45012,11 +45012,9 @@ const fs = __nccwpck_require__(7147);
 const defectDojoURL = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-url');
 const defectDojoToken = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-api-key');
 const productName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('product-name');
-console.log(productName);
-//////
-const engagementName = "test_ci_cd_engagement";
-const scanType = "Yarn Audit Scan";
-const scanFile = "yarn_audit.json";
+const engagementName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('engagement-name');
+const scanType = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('scan-type');
+const scanFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('scan-filename');
 
 (async () => {
     const options = {
@@ -45038,6 +45036,7 @@ const scanFile = "yarn_audit.json";
     
     request(options, function (err, res, body) {
         if(err) console.log(err);
+        console.log(res.statusCode)
         console.log(body);
         console.log("Uploaded Successfully to DefectDojo")
     });
