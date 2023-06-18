@@ -14,7 +14,7 @@ const severityLevelConst = {
 const severityLevel = getInput('severity-level');
 const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
-const outputFile = getInput('output-filename')
+const outputFile = getInput('output-filename');
 
 (async () => {
     // Run the tool and upload files to DefectDojo

@@ -4149,7 +4149,7 @@ const severityLevelConst = {
 const severityLevel = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('severity-level');
 const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
-const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename')
+const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
 
 (async () => {
     // Run the tool and upload files to DefectDojo
