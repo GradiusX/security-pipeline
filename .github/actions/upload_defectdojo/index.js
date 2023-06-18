@@ -13,7 +13,7 @@ const engagementName = "test_ci_cd_engagement"
 const scanType = "Yarn Audit Scan"
 const scanfile = "yarn_audit.json"
 
-console.log(github.repository)
+console.log(github.action_repository)
 
 (async () => {
     const options = {
