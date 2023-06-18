@@ -33,6 +33,7 @@ const outputFile = getInput('output-filename');
         silent: true,
         ignoreReturnCode: true
     }
+    console.log(outputFile);
 
     if ( typeof outputFile !== 'undefined' && outputFile ){
         // if an output file has been defined, save json output to it
