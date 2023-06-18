@@ -7,9 +7,9 @@ const defectDojoURL = getInput('defectdojo-url');
 const defectDojoToken = getInput('defectdojo-api-key');
 const projectName = getInput('product-name');
 //////
-const engagementName = "test_ci_cd_engagement"
-const scanType = "Yarn Audit Scan"
-const scanFile = "yarn_audit.json"
+const engagementName = "test_ci_cd_engagement";
+const scanType = "Yarn Audit Scan";
+const scanFile = "yarn_audit.json";
 
 (async () => {
     const options = {

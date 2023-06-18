@@ -45013,9 +45013,9 @@ const defectDojoURL = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('d
 const defectDojoToken = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('defectdojo-api-key');
 const projectName = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('product-name');
 //////
-const engagementName = "test_ci_cd_engagement"
-const scanType = "Yarn Audit Scan"
-const scanFile = "yarn_audit.json"
+const engagementName = "test_ci_cd_engagement";
+const scanType = "Yarn Audit Scan";
+const scanFile = "yarn_audit.json";
 
 (async () => {
     const options = {
