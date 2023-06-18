@@ -30,7 +30,7 @@ const scanFile = getInput('scan-filename');
     
     request(options, function (err, res, body) {
         if(err) console.log(err);
-        if (res.statusCode != 200){
+        if (res.statusCode != 201){
             console.log(res.statusCode);
             setFailed(body);
         }
