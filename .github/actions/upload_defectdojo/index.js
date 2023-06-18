@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const defectDojoURL = getInput('defectdojo-url');
 const defectDojoToken = getInput('defectdojo-api-key');
-const projectName = getInput('product-name');
+const productName = getInput('product-name');
 //////
 const engagementName = "test_ci_cd_engagement";
 const scanType = "Yarn Audit Scan";
