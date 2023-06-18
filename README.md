@@ -1,5 +1,5 @@
-# Security Pipeline Reusable Workflow v1.1
-## dev
+# Security Pipeline Reusable Workflow
+
 ## Example usage
 
 ```yaml
@@ -11,7 +11,7 @@ on:
         branches: [main]
 jobs:
     Security-Pipeline:
-        uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@v1.1
+        uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@dev
         with:
             continue-on-error: false
             severity-level: "critical"

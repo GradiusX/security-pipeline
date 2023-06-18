@@ -11129,27 +11129,26 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
         //cwd : './test'
     }
 
-    // await _exec('yarn', ['audit', '--json'], options);
-    // fs.createReadStream(scanFile)
-    // fs.writeFile('yarn_audit.json', commandOutput, err => {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     console.log("successfully wrote yarn_audit.json")
-    //     //console.log("Successfully uploaded results to DefectDojo")
-    // });
+    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--json'], options);
+    fs.writeFile('yarn_audit.json', commandOutput, err => {
+        if (err) {
+          console.log(err);
+        }
+        console.log("successfully wrote yarn_audit.json")
+    });
+
     // const a1 = getInput('defectdojo-url');
     // console.log(a1)
     // const a2 = getInput('defectdojo-api-key')
     // console.log(a2)
     // console.log(github.repository)
-    // // reset Output and Error and re-run tool for CI/CD output
-    // commandOutput = '';
-    // commandError = '';
 
+
+    // reset Output and Error and re-run tool for CI/CD output
+    commandOutput = '';
+    commandError = '';
 
     const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('yarn', ['audit', '--level', severityLevel], options);
-
     if (exitCode >= severityLevelNum){
         console.log(commandOutput)
         ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Update the above vulnerable dependencies!");

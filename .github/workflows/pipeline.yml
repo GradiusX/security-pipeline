@@ -12,13 +12,13 @@ on:
         required: true
         type: string
         default: "critical"
-    # secrets:
-    #   defectdojo-url:
-    #     description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
-    #     required: true
-    #   defectdojo-api-key:
-    #     description: 'API key for Defect Dojo Instance'
-    #     required: true
+    secrets:
+      defectdojo-url:
+        description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+        required: true
+      defectdojo-api-key:
+        description: 'API key for Defect Dojo Instance'
+        required: true
 
 
 jobs:
@@ -42,16 +42,14 @@ jobs:
       - name: Running Yarn Audit on Repo
         if: steps.check_yarn_lock.outputs.check_result == 'true'
         id: yarn_audit
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # THIS CANNOT BE MAIN ANYMORE ELSE WE CAN'T TEST AND STUFF - maybe it has to be downloaded locally
-        # OR ANOTHER OPTION WOULD BE TO HAVE A PRODUCTION BRANCH @PRODUCTION for example or @release
-        # OR ANOTHER OPTION IS TO USE MAIN AS PRODUCTION AND CREATE A TESTING BRANCH
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
+        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
         with:
           severity-level: ${{ inputs.severity-level }}
-          # defectdojo-url: ${{ secrets.defectdojo-url }}
-          # defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          defectdojo-url: ${{ secrets.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+
+      - name: list files and display yarn_audit.json
+        id: temp
+        run: |
+          ls -la;
+          cat yarn_audit.json
