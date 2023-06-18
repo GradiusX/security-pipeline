@@ -4151,8 +4151,8 @@ const severityLevelNum = severityLevelConst[severityLevel.toUpperCase()];
 
 const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
 
+
 (async () => {
-    // Run the tool and upload files to DefectDojo
     let commandOutput = '';
     let commandError = '';
 
@@ -4167,28 +4167,29 @@ const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('outp
         },
         silent: true,
         ignoreReturnCode: true
-        //cwd : './test'
     }
+    console.log(outputFile);
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('yarn', ['audit', '--json'], options);
-    fs.writeFile(outputFile, commandOutput, err => {
-        if (err) {
-          console.log(err);
-        }
-        console.log("Successfully wrote yarn_audit.json")
-    });
-
-    // reset Output and Error Streams and re-run tool for CI/CD output
-    commandOutput = '';
-    commandError = '';
-
-    const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('yarn', ['audit', '--level', severityLevel], options);
-    if (exitCode >= severityLevelNum){
-        console.log(commandOutput)
-        ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Update the above vulnerable dependencies!");
+    if ( typeof outputFile !== 'undefined' && outputFile ){
+        // if an output file has been defined, save json output to it
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('yarn', ['audit', '--json'], options);
+        fs.writeFile(outputFile, commandOutput, err => {
+            if (err) {
+              console.log(err);
+            }
+            console.log("Successfully wrote yarn_audit.json")
+        });
     }
     else{
-        console.log("All good here!!")
+        // if an output file has NOT been defined, display output
+        const exitCode = await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('yarn', ['audit', '--level', severityLevel], options);
+        if (exitCode >= severityLevelNum){
+            console.log(commandOutput)
+            ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Update the above vulnerable dependencies!");
+        }
+        else{
+            console.log("All good here!!")
+        }
     }
 })();
 })();
