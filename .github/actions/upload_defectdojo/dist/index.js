@@ -42632,7 +42632,7 @@ const scanFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('scan-f
         formData : {
             "product_name": productName,
             //"engagement_name": engagementName,
-            "engagement_name": Date.now(),
+            "engagement_name": productName.concat(Date.now().toString()),
             "scan_type": scanType,
             "auto_create_context": "true",
             "close_old_findings": "true",
