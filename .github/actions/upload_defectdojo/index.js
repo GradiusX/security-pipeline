@@ -20,8 +20,10 @@ const scanFile = getInput('scan-filename');
         },
         formData : {
             "product_name": productName,
-            "engagement_name": engagementName,
+            //"engagement_name": engagementName,
+            "engagement_name": Date.now().toString().concat('cicd'),
             "scan_type": scanType,
+            "auto_create_context": "true",
             "close_old_findings": "true",
             "close_old_findings_product_scope": "true",
             "file" : fs.createReadStream(scanFile)
