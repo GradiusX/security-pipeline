@@ -1,4 +1,4 @@
-# Security Pipeline Reusable Workflow v1.1
+# Security Pipeline Reusable Workflow
 
 ## Example usage
 
@@ -11,11 +11,11 @@ on:
         branches: [main]
 jobs:
     Security-Pipeline:
-        uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@v1.1
+        uses: GradiusX/security-pipeline/.github/workflows/pipeline.yml@main
         with:
             continue-on-error: false
             severity-level: "critical"
+            defectdojo-url: ${{ vars.DEFECTDOJO_URL }}
         secrets:
-            defectdojo-url: ${{ secrets.DEFECTDOJO_URL }}
             defectdojo-api-key: ${{ secrets.DEFECTDOJO_API_KEY }}
 ```

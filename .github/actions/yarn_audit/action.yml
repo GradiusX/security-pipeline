@@ -1,15 +1,11 @@
-name: 'Security Pipeline'
-description: 'Run several security tools on the project'
+name: 'Yarn Audit'
+description: 'Runs "yarn audit" on NodeJS Project'
 inputs:
   severity-level:
     description: 'Min Severity Level to Report'
-    required: true
-  # defectdojo-url:
-  #   description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
-  #   required: true
-  # defectdojo-api-key:
-  #   description: 'API key for Defect Dojo Instance'
-  #   required: true
+    default: "info"
+  output-filename:
+    description: 'File name containing full scan output. If unspecified, output is not saved'
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -11,26 +11,27 @@ on:
         description: 'Min Severity Level to Report'
         required: true
         type: string
-        default: "critical"
-    # secrets:
-    #   defectdojo-url:
-    #     description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
-    #     required: true
-    #   defectdojo-api-key:
-    #     description: 'API key for Defect Dojo Instance'
-    #     required: true
+        default: "critical"    
+      defectdojo-url:
+        description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+        type: string
+        required: true
+    secrets:
+      defectdojo-api-key:
+        description: 'API key for Defect Dojo Instance'
+        required: true
 
 
 jobs:
-  security-pipeline:
+  nodejs-security-checks:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ inputs.continue-on-error }}
+    # continue-on-error: ${{ inputs.continue-on-error }}
     steps:  
       - name: Check out repository code
         uses: actions/checkout@v3
 
       - name: Check existence of yarn.lock
-        id: check_yarn_lock
+        id: check_yarn_lock_file
         run: |
           if test -f "yarn.lock"; 
           then 
@@ -39,11 +40,29 @@ jobs:
             echo "check_result=false" >> $GITHUB_OUTPUT 
           fi
 
-      - name: Running Yarn Audit on Repo
-        if: steps.check_yarn_lock.outputs.check_result == 'true'
-        id: yarn_audit
+      - name: Running Full Yarn Audit on Repo
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+        id: yarn_audit_full
+        uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
+        with:
+          output-filename: "yarn_audit.json"
+
+      - name: Uploading Yarn Audit files to DefectDojo
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+        id: upload_defectdojo_yarn_audit
+        uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@main
+        with:
+          defectdojo-url: ${{ inputs.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          product-name: ${{ github.event.repository.name }}
+          engagement-name: "CICD_engagement"
+          scan-type: "Yarn Audit Scan"
+          scan-filename: "yarn_audit.json"
+
+      - name: Running Specific Yarn Audit on Repo
+        if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+        continue-on-error: ${{ inputs.continue-on-error }}
+        id: yarn_audit_specific
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
-          # defectdojo-url: ${{ secrets.defectdojo-url }}
-          # defectdojo-api-key: ${{ secrets.defectdojo-api-key }}

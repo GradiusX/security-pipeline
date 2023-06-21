@@ -1,0 +1,24 @@
+name: 'Upload DefectDojo'
+description: 'Uploads results to DefectDojo'
+inputs:
+  defectdojo-url:
+    description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+    required: true
+  defectdojo-api-key:
+    description: 'API key for Defect Dojo Instance'
+    required: true
+  product-name:
+    description: 'Name of the project/repo'
+    required: true
+  engagement-name:
+    description: 'Name of the Engagement'
+    required: true
+  scan-type:
+    description: 'Type of scan to import'
+    required: true
+  scan-filename:
+    description: 'File containing scan output'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

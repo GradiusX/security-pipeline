@@ -1,10 +1,16 @@
+import { getInput, setFailed } from '@actions/core';
+import github from '@actions/github';
 const request = require("request");
 const fs = require("fs");
 
 const defectDojoURL = getInput('defectdojo-url');
 const defectDojoToken = getInput('defectdojo-api-key');
+const productName = getInput('product-name');
+const engagementName = getInput('engagement-name');
+const scanType = getInput('scan-type');
+const scanFile = getInput('scan-filename');
 
-function sendToDefectDojo(productName, engagementName, scanType, scanFile){
+(async () => {
     const options = {
         method: "POST",
         url: defectDojoURL.concat('/api/v2/import-scan/'),
@@ -14,8 +20,10 @@ function sendToDefectDojo(productName, engagementName, scanType, scanFile){
         },
         formData : {
             "product_name": productName,
-            "engagement_name": engagementName,
+            //"engagement_name": engagementName,
+            "engagement_name": productName.concat('-').concat(Date.now().toString()),
             "scan_type": scanType,
+            "auto_create_context": "true",
             "close_old_findings": "true",
             "close_old_findings_product_scope": "true",
             "file" : fs.createReadStream(scanFile)
@@ -24,11 +32,13 @@ function sendToDefectDojo(productName, engagementName, scanType, scanFile){
     
     request(options, function (err, res, body) {
         if(err) console.log(err);
-        console.log(body);
-        console.log("Uploaded Successfully to DefectDojo")
+        if (res.statusCode != 201){
+            console.log(res.statusCode);
+            setFailed(body);
+        }
+        else{
+            console.log(body);
+            console.log("Uploaded Successfully to DefectDojo");
+        }
     });
-}
-
-
-// exported functions
-module.exports = { sendToDefectDojo };
+})();
