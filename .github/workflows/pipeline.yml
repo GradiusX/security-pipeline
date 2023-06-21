@@ -11,13 +11,14 @@ on:
         description: 'Min Severity Level to Report'
         required: true
         type: string
-        default: "critical"
-    secrets:
+        default: "critical"    
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
+        type: string
         required: true
       defectdojo-api-key:
         description: 'API key for Defect Dojo Instance'
+        type: string
         required: true
 
 
@@ -51,8 +52,8 @@ jobs:
         id: upload_defectdojo_yarn_audit
         uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
         with:
-          defectdojo-url: ${{ secrets.defectdojo-url }}
-          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          defectdojo-url: ${{ inputs.defectdojo-url }}
+          defectdojo-api-key: ${{ inputs.defectdojo-api-key }}
           product-name: ${{ github.event.repository.name }}
           engagement-name: "CICD_engagement"
           scan-type: "Yarn Audit Scan"

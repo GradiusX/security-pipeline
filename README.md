@@ -15,7 +15,6 @@ jobs:
         with:
             continue-on-error: false
             severity-level: "critical"
-        secrets:
-            defectdojo-url: ${{ secrets.DEFECTDOJO_URL }}
+            defectdojo-url: ${{ vars.DEFECTDOJO_URL }}
             defectdojo-api-key: ${{ secrets.DEFECTDOJO_API_KEY }}
 ```
