@@ -16,9 +16,9 @@ on:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
         type: string
         required: true
+    secrets:
       defectdojo-api-key:
         description: 'API key for Defect Dojo Instance'
-        type: string
         required: true
 
 
@@ -53,7 +53,7 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
         with:
           defectdojo-url: ${{ inputs.defectdojo-url }}
-          defectdojo-api-key: ${{ inputs.defectdojo-api-key }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
           product-name: ${{ github.event.repository.name }}
           engagement-name: "CICD_engagement"
           scan-type: "Yarn Audit Scan"
