@@ -4,8 +4,15 @@ const fs = require("fs");
 
 //const outputFile = getInput('output-filename');
 
-
 (async () => {
+
+    // Create an a file with a list of ignored files
+    fs.writeFile('trufflehogignore', '^\.git/.*', err => {
+        if (err) {
+            console.log(err);
+        }
+    });
+
     let commandOutput = '';
     let commandError = '';
 
@@ -22,7 +29,7 @@ const fs = require("fs");
         ignoreReturnCode: true
     }
 
-    await _exec('trufflehog', ['filesystem','.','--exclude'], options);
+    await _exec('trufflehog', ['filesystem','.','--github-actions', '--only-verified','--exclude-paths=trufflehogignore'], options);
     console.log(commandOutput)
 
     // if ( typeof outputFile !== 'undefined' && outputFile ){
