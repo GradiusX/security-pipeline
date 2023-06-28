@@ -22,7 +22,7 @@ const fs = require("fs");
         ignoreReturnCode: true
     }
 
-    await _exec('trufflehog', ['filesystem','.'], options);
+    await _exec('trufflehog', ['filesystem','.','--exclude'], options);
     console.log(commandOutput)
 
     // if ( typeof outputFile !== 'undefined' && outputFile ){
