@@ -30,7 +30,11 @@ jobs:
       - name: Public Repo Check
         id: check_public
         run: |
-          curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack
+          if [ curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack -eq 200];
+          then
+            echo "public"
+          else
+            echo "private"
 
       # - name: Check out repository code
       #   uses: actions/checkout@v3
