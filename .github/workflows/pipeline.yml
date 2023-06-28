@@ -23,56 +23,66 @@ on:
 
 
 jobs:
-  nodejs-security-checks:
+  # nodejs-security-checks:
+  #   runs-on: ubuntu-latest
+  #   # continue-on-error: ${{ inputs.continue-on-error }}
+  #   steps:  
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v3
+
+  #     - name: Check existence of yarn.lock
+  #       id: check_yarn_lock_file
+  #       run: |
+  #         if test -f "yarn.lock"; 
+  #         then 
+  #           echo "check_result=true" >> $GITHUB_OUTPUT
+  #         else 
+  #           echo "check_result=false" >> $GITHUB_OUTPUT 
+  #         fi
+
+  #     - name: Running Full Yarn Audit on Repo
+  #       if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+  #       id: yarn_audit_full
+  #       uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
+  #       with:
+  #         output-filename: "yarn_audit.json"
+
+  #     - name: Uploading Yarn Audit files to DefectDojo
+  #       if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+  #       id: upload_defectdojo_yarn_audit
+  #       uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
+  #       with:
+  #         defectdojo-url: ${{ inputs.defectdojo-url }}
+  #         defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+  #         product-name: ${{ github.event.repository.name }}
+  #         engagement-name: "CICD_engagement"
+  #         scan-type: "Yarn Audit Scan"
+  #         scan-filename: "yarn_audit.json"
+
+  #     - name: Running Specific Yarn Audit on Repo
+  #       if: steps.check_yarn_lock_file.outputs.check_result == 'true'
+  #       continue-on-error: ${{ inputs.continue-on-error }}
+  #       id: yarn_audit_specific
+  #       uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
+  #       with:
+  #         severity-level: ${{ inputs.severity-level }}
+
+  secrets-security-checks:
     runs-on: ubuntu-latest
-    # continue-on-error: ${{ inputs.continue-on-error }}
-    steps:  
+    steps:
       - name: Public Repo Check
-        id: check_public
+        id: check_public_repo
         run: |
           if [ `curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack` -eq 200 ];
           then
-            echo "public"
+            echo "public_repo=true" >> $GITHUB_OUTPUT
           else
-            echo "private"
+            echo "public_repo=false" >> $GITHUB_OUTPUT
           fi
-
-      # - name: Check out repository code
-      #   uses: actions/checkout@v3
-
-      # - name: Check existence of yarn.lock
-      #   id: check_yarn_lock_file
-      #   run: |
-      #     if test -f "yarn.lock"; 
-      #     then 
-      #       echo "check_result=true" >> $GITHUB_OUTPUT
-      #     else 
-      #       echo "check_result=false" >> $GITHUB_OUTPUT 
-      #     fi
-
-      # - name: Running Full Yarn Audit on Repo
-      #   if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-      #   id: yarn_audit_full
-      #   uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
-      #   with:
-      #     output-filename: "yarn_audit.json"
-
-      # - name: Uploading Yarn Audit files to DefectDojo
-      #   if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-      #   id: upload_defectdojo_yarn_audit
-      #   uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
-      #   with:
-      #     defectdojo-url: ${{ inputs.defectdojo-url }}
-      #     defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
-      #     product-name: ${{ github.event.repository.name }}
-      #     engagement-name: "CICD_engagement"
-      #     scan-type: "Yarn Audit Scan"
-      #     scan-filename: "yarn_audit.json"
-
-      # - name: Running Specific Yarn Audit on Repo
-      #   if: steps.check_yarn_lock_file.outputs.check_result == 'true'
-      #   continue-on-error: ${{ inputs.continue-on-error }}
-      #   id: yarn_audit_specific
-      #   uses: GradiusX/security-pipeline/.github/actions/yarn_audit@dev
-      #   with:
-      #     severity-level: ${{ inputs.severity-level }}
+      - name: Download and Unpack TruffleHog
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        run: |
+          wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.41.1/trufflehog_3.41.1_linux_arm64.tar.gz
+          tar -xf trufflehog_3.41.1_linux_arm64.tar.gz
+          cd trufflehog_3.41.1_linux_arm64
+          ls -la
