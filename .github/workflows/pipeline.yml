@@ -30,7 +30,7 @@ jobs:
       - name: Public Repo Check
         id: check_public
         run: |
-          echo curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack
+          curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack
 
       # - name: Check out repository code
       #   uses: actions/checkout@v3
