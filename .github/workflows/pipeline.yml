@@ -78,10 +78,12 @@ jobs:
             echo "public_repo=true" >> $GITHUB_OUTPUT
           else
             echo "public_repo=false" >> $GITHUB_OUTPUT
-          fi
+          fi 
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Download and Unpack Latest TruffleHog
         if: steps.check_public_repo.outputs.public_repo == 'true'
         run: |
           th=`curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.assets[] | select(.name | contains("linux_amd64")) | .browser_download_url'`
           wget -q -O - $th | tar xz
-          ./trufflehog
+          dir
