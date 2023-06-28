@@ -4160,8 +4160,8 @@ const fs = __nccwpck_require__(147);
                 commandError += data.toString();
             }
         },
-        silent: true,
-        ignoreReturnCode: true
+        silent: true
+        //ignoreReturnCode: true
     }
 
     await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore'], options);

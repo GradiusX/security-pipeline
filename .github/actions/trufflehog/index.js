@@ -25,8 +25,8 @@ const fs = require("fs");
                 commandError += data.toString();
             }
         },
-        silent: true,
-        ignoreReturnCode: true
+        silent: true
+        //ignoreReturnCode: true
     }
 
     await _exec('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore'], options);
