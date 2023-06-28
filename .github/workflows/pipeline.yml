@@ -88,5 +88,5 @@ jobs:
           wget -q -O - $th | tar xz
           echo $PATH
           id
-          cp trufflehog /usr/local/bin
+          mv trufflehog /usr/local/bin
           trufflehog filesystem .
