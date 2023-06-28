@@ -4139,8 +4139,15 @@ const fs = __nccwpck_require__(147);
 
 //const outputFile = getInput('output-filename');
 
-
 (async () => {
+
+    // Create an a file with a list of ignored files
+    fs.writeFile('trufflehogignore', '^\.git/.*', err => {
+        if (err) {
+            console.log(err);
+        }
+    });
+
     let commandOutput = '';
     let commandError = '';
 
@@ -4157,7 +4164,7 @@ const fs = __nccwpck_require__(147);
         ignoreReturnCode: true
     }
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.'], options);
+    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.','--github-actions', '--only-verified','--exclude-paths=trufflehogignore'], options);
     console.log(commandOutput)
 
     // if ( typeof outputFile !== 'undefined' && outputFile ){
