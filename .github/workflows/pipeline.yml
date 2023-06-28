@@ -85,3 +85,4 @@ jobs:
           wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.41.1/trufflehog_3.41.1_linux_amd64.tar.gz
           tar -xf trufflehog_3.41.1_linux_amd64.tar.gz
           ./trufflehog
+          jq
