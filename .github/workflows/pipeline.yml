@@ -86,6 +86,7 @@ jobs:
         run: |
           th=`curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.assets[] | select(.name | contains("linux_amd64")) | .browser_download_url'`
           wget -q -O - $th | tar xz
-          cp trufflehog /usr/bin
-          trufflehog filesystem .
           echo $PATH
+          id
+          cp trufflehog /usr/local/bin
+          trufflehog filesystem .
