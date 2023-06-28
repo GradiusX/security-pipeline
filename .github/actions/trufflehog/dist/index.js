@@ -4164,7 +4164,7 @@ const fs = __nccwpck_require__(147);
         //ignoreReturnCode: true
     }
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore'], options);
+    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--fail','--exclude-paths=trufflehogignore'], options);
     console.log(commandOutput)
 
     // if ( typeof outputFile !== 'undefined' && outputFile ){
