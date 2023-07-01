@@ -4177,7 +4177,7 @@ const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('outp
             if (err) {
               console.log(err);
             }
-            console.log("Successfully wrote yarn_audit.json")
+            console.log("Successfully wrote".concat(' ', outputFile))
         });
     }
     else{

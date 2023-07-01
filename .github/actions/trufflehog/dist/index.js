@@ -4137,11 +4137,11 @@ __nccwpck_require__.r(__webpack_exports__);
 
 const fs = __nccwpck_require__(147);
 
-//const outputFile = getInput('output-filename');
+const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
 
 (async () => {
 
-    // Create an a file with a list of ignored files
+    // Create an a file with a list of ignored files, .git is always ignored
     fs.writeFile('trufflehogignore', '^\.git/.*', err => {
         if (err) {
             console.log(err);
@@ -4164,20 +4164,17 @@ const fs = __nccwpck_require__(147);
         //ignoreReturnCode: true
     }
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--fail','--exclude-paths=trufflehogignore'], options);
-    console.log(commandOutput)
-
-    // if ( typeof outputFile !== 'undefined' && outputFile ){
-    //     // if an output file has been defined, save json output to it
-    //     await _exec('yarn', ['audit', '--json'], options);
-    //     console.log(commandOutput)
-    //     fs.writeFile(outputFile, commandOutput, err => {
-    //         if (err) {
-    //           console.log(err);
-    //         }
-    //         console.log("Successfully wrote yarn_audit.json")
-    //     });
-    // }
+    if ( typeof outputFile !== 'undefined' && outputFile ){
+        // if an output file has been defined, save json output to it
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--fail','--exclude-paths=trufflehogignore', '--json'], options);
+        console.log(commandOutput)
+        fs.writeFile(outputFile, commandOutput, err => {
+            if (err) {
+              console.log(err);
+            }
+            console.log("Successfully wrote".concat(' ', outputFile))
+        });
+    }
     // else{
     //     // if an output file has NOT been defined, display output
     //     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);

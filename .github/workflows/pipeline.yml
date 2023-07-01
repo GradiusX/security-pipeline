@@ -79,8 +79,10 @@ jobs:
           else
             echo "public_repo=false" >> $GITHUB_OUTPUT
           fi 
+
       - name: Check out repository code
         uses: actions/checkout@v3
+
       - name: Download and Setup Latest TruffleHog
         if: steps.check_public_repo.outputs.public_repo == 'true'
         run: |
@@ -88,10 +90,16 @@ jobs:
           wget -q -O - $th | tar xz
           mv trufflehog /usr/local/bin
           # ignore .git folder
-          
-
 
       - name: Running Full Trufflehog on Repo
         if: steps.check_public_repo.outputs.public_repo == 'true'
         id: trufflehog_full
         uses: GradiusX/security-pipeline/.github/actions/trufflehog@dev
+        with:
+          output-filename: "trufflehog.json"
+      
+      - name: temp
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        run: |
+          ls -la
+          cat trufflehog.json

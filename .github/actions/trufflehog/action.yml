@@ -1,11 +1,14 @@
 name: 'TruffleHog'
 description: 'Runs TruffleHog to uncover secrets'
-# inputs:
+inputs:
 #   severity-level:
 #     description: 'Min Severity Level to Report'
 #     default: "info"
-#   output-filename:
-#     description: 'File name containing full scan output. If unspecified, output is not saved'
+  output-filename:
+    description: 'File name containing full scan output. If unspecified, output is not saved'
+  excluded-folder-regex:
+    # TO BE TESTED
+    description: 'Regex of files to exclude from scan eg: ['^\.git/.*', '^\.git/.*']'
 runs:
   using: 'node16'
   main: 'dist/index.js'
