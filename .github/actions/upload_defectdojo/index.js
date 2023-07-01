@@ -23,7 +23,7 @@ let today = new Date(Date.now());
         formData : {
             "product_name": productName,
             "engagement_name": engagementName,
-            "engagement_end_date":  today.getFullYear()+"-"+today.getMonth()+"-"+(today.getDate()+2),
+            "engagement_end_date":  today.getFullYear()+"-"+today.getMonth()+"-"+(today.getDate()),
             "scan_type": scanType,
             "auto_create_context": "true",
             "close_old_findings": "true",
