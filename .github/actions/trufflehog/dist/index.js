@@ -4160,13 +4160,13 @@ const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('outp
                 commandError += data.toString();
             }
         },
-        silent: true
-        //ignoreReturnCode: true
+        silent: true,
+        ignoreReturnCode: true
     }
 
     if ( typeof outputFile !== 'undefined' && outputFile ){
         // if an output file has been defined, save json output to it
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--fail','--exclude-paths=trufflehogignore', '--json'], options);
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore', '--json'], options);
         console.log(commandOutput)
         fs.writeFile(outputFile, commandOutput, err => {
             if (err) {

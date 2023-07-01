@@ -25,13 +25,13 @@ const outputFile = getInput('output-filename');
                 commandError += data.toString();
             }
         },
-        silent: true
-        //ignoreReturnCode: true
+        silent: true,
+        ignoreReturnCode: true
     }
 
     if ( typeof outputFile !== 'undefined' && outputFile ){
         // if an output file has been defined, save json output to it
-        await _exec('trufflehog', ['filesystem','.', '--only-verified','--fail','--exclude-paths=trufflehogignore', '--json'], options);
+        await _exec('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore', '--json'], options);
         console.log(commandOutput)
         fs.writeFile(outputFile, commandOutput, err => {
             if (err) {
