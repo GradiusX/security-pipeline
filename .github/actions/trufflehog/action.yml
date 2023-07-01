@@ -8,7 +8,7 @@ inputs:
     description: 'File name containing full scan output. If unspecified, output is not saved'
   excluded-folder-regex:
     # TO BE TESTED
-    description: 'Regex of files to exclude from scan eg: ['^\.git/.*', '^\.git/.*']'
+    description: 'Regex of files to exclude from scan'
 runs:
   using: 'node16'
   main: 'dist/index.js'
