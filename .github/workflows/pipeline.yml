@@ -98,8 +98,14 @@ jobs:
         with:
           output-filename: "trufflehog.json"
       
-      - name: temp
+      - name: Uploading Trufflehog files to DefectDojo
         if: steps.check_public_repo.outputs.public_repo == 'true'
-        run: |
-          ls -la
-          cat trufflehog.json
+        id: upload_defectdojo_trufflehog
+        uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@dev
+        with:
+          defectdojo-url: ${{ inputs.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          product-name: ${{ github.event.repository.name }}
+          engagement-name: "${{ github.event.repository.name }}-${{ github.run_number }}"
+          scan-type: "Trufflehog Scan"
+          scan-filename: "trufflehog.json"
