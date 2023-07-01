@@ -42635,7 +42635,7 @@ let today = new Date(Date.now());
             "product_name": productName,
             "engagement_name": engagementName,
             // "engagement_end_date":  today.getFullYear()+"-"+today.getMonth()+"-"+(today.getDate()),
-            "engagement_end_date":  "2023-6-3",
+            "engagement_end_date":  "2023-06-03",
             "scan_type": scanType,
             "auto_create_context": "true",
             "close_old_findings": "true",
