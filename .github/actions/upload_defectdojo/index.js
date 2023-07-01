@@ -10,6 +10,8 @@ const engagementName = getInput('engagement-name');
 const scanType = getInput('scan-type');
 const scanFile = getInput('scan-filename');
 
+let today = new Date(Date.now());
+
 (async () => {
     const options = {
         method: "POST",
@@ -21,7 +23,7 @@ const scanFile = getInput('scan-filename');
         formData : {
             "product_name": productName,
             "engagement_name": engagementName,
-            "engagement_end_date": "2023-7-3",
+            "engagement_end_date":  today.getFullYear()+"-"+today.getMonth()+"-"+(today.getDate()+1),
             "scan_type": scanType,
             "auto_create_context": "true",
             "close_old_findings": "true",
