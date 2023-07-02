@@ -4138,7 +4138,7 @@ __nccwpck_require__.r(__webpack_exports__);
 const fs = __nccwpck_require__(147);
 
 const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
-const exclusionString = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('trufflehog-exclusion-list');
+const exclusionString = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('secrets-exclusion-list');
 const exclusionList = exclusionString.split(' ');
 
 (async () => {

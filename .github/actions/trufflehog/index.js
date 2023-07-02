@@ -3,7 +3,7 @@ import { exec as _exec } from '@actions/exec';
 const fs = require("fs");
 
 const outputFile = getInput('output-filename');
-const exclusionString = getInput('trufflehog-exclusion-list');
+const exclusionString = getInput('secrets-exclusion-list');
 const exclusionList = exclusionString.split(' ');
 
 (async () => {

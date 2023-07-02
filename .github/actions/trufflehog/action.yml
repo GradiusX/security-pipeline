@@ -3,7 +3,7 @@ description: 'Runs TruffleHog to uncover secrets'
 inputs:
   output-filename:
     description: 'File name containing full scan output. If unspecified, output is not saved'
-  trufflehog-exclusion-list:
+  secrets-exclusion-list:
     description: 'Regex of files to exclude from scan'
 runs:
   using: 'node16'
