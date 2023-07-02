@@ -15,7 +15,8 @@ jobs:
         with:
             continue-on-error: false
             severity-level: "critical"
-            trufflehog-exclusion-list: "test"
+            trufflehog-exclusion-list: >
+                ^\.git/.*
             defectdojo-url: ${{ vars.DEFECTDOJO_URL }}
         secrets:
             defectdojo-api-key: ${{ secrets.DEFECTDOJO_API_KEY }}
