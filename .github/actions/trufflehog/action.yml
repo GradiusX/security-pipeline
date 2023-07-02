@@ -8,6 +8,7 @@ inputs:
     description: 'File name containing full scan output. If unspecified, output is not saved'
   trufflehog-exclusion-list:
     description: 'Regex of files to exclude from scan'
+    default: 'mehhhh'
 runs:
   using: 'node16'
   main: 'dist/index.js'

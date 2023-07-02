@@ -14,7 +14,6 @@ on:
       trufflehog-exclusion-list:
         description: 'Array of regexs to exclude'
         type: string
-        default: "test"
         # default: "['^\\.git/.*']"
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
