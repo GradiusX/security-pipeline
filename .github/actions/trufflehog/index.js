@@ -45,7 +45,7 @@ const exclusionList = exclusionString.split(' ');
         const exitCode =  await _exec('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore','--fail'], options);
         if (exitCode){
             console.log(commandOutput)
-            setFailed("Potentially leaked secrets! Remove if not required, else whitelist them via the 'excluded-file-regex' workflow input");
+            setFailed("Potentially leaked secrets! Remove if not required, else whitelist them via the 'secrets-exclusion-list' workflow input");
         }
         else{
             console.log("All good here!!")

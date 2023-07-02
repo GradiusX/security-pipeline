@@ -4180,7 +4180,7 @@ const exclusionList = exclusionString.split(' ');
         const exitCode =  await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore','--fail'], options);
         if (exitCode){
             console.log(commandOutput)
-            ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Potentially leaked secrets! Remove if not required, else whitelist them via the 'excluded-file-regex' workflow input");
+            ;(0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)("Potentially leaked secrets! Remove if not required, else whitelist them via the 'secrets-exclusion-list' workflow input");
         }
         else{
             console.log("All good here!!")
