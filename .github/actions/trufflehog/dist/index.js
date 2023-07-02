@@ -4140,7 +4140,7 @@ const fs = __nccwpck_require__(147);
 const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
 const exclusionString = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('trufflehog-exclusion-list');
 const exclusionList = exclusionString.split();
-console.log(exclusionList);
+console.log(exclusionString);
 console.log(typeof(exclusionList));
 
 (async () => {
