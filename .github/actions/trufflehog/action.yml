@@ -6,7 +6,7 @@ inputs:
 #     default: "info"
   output-filename:
     description: 'File name containing full scan output. If unspecified, output is not saved'
-  excluded-folder-regex:
+  excluded-file-regex:
     # TO BE TESTED
     description: 'Regex of files to exclude from scan'
 runs:

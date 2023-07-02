@@ -32,7 +32,6 @@ const outputFile = getInput('output-filename');
     if ( typeof outputFile !== 'undefined' && outputFile ){
         // if an output file has been defined, save json output to it
         await _exec('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore', '--json'], options);
-        console.log(commandOutput)
         fs.writeFile(outputFile, commandOutput, err => {
             if (err) {
               console.log(err);
@@ -40,15 +39,15 @@ const outputFile = getInput('output-filename');
             console.log("Successfully wrote".concat(' ', outputFile))
         });
     }
-    // else{
-    //     // if an output file has NOT been defined, display output
-    //     const exitCode = await _exec('yarn', ['audit', '--level', severityLevel], options);
-    //     if (exitCode >= severityLevelNum){
-    //         console.log(commandOutput)
-    //         setFailed("Update the above vulnerable dependencies!");
-    //     }
-    //     else{
-    //         console.log("All good here!!")
-    //     }
-    // }
+    else{
+        // if an output file has NOT been defined, display output
+        const exitCode =  await _exec('trufflehog', ['filesystem','.', '--only-verified','--exclude-paths=trufflehogignore','--fail'], options);
+        if (exitCode){
+            console.log(commandOutput)
+            setFailed("Potentially leaked secrets! Remove if not required, else whitelist them via the 'excluded-file-regex' workflow input");
+        }
+        else{
+            console.log("All good here!!")
+        }
+    }
 })();
