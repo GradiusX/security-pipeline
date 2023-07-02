@@ -3,10 +3,14 @@ import { exec as _exec } from '@actions/exec';
 const fs = require("fs");
 
 const outputFile = getInput('output-filename');
+const exclusionString = getInput('trufflehog-exclusion-list');
+const exclusionList = exclusionString.split();
+console.log(exclusionList);
+console.log(typeof(exclusionList));
 
 (async () => {
 
-    // Create an a file with a list of ignored files, .git is always ignored
+    // Create a file with a list of ignored files, .git is always ignored
     fs.writeFile('trufflehogignore', '^\.git/.*', err => {
         if (err) {
             console.log(err);

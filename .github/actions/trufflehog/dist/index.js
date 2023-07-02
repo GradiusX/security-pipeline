@@ -4138,10 +4138,14 @@ __nccwpck_require__.r(__webpack_exports__);
 const fs = __nccwpck_require__(147);
 
 const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('output-filename');
+const exclusionString = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('trufflehog-exclusion-list');
+const exclusionList = exclusionString.split();
+console.log(exclusionList);
+console.log(typeof(exclusionList));
 
 (async () => {
 
-    // Create an a file with a list of ignored files, .git is always ignored
+    // Create a file with a list of ignored files, .git is always ignored
     fs.writeFile('trufflehogignore', '^\.git/.*', err => {
         if (err) {
             console.log(err);

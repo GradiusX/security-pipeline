@@ -11,7 +11,11 @@ on:
         description: 'Min Severity Level to Report'
         required: true
         type: string
-        default: "critical"    
+        default: "critical"
+      trufflehog-exclusion-list:
+        description: 'Array of regexs to exclude'
+        type: string
+        default: "['^\\.git/.*']"
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
         type: string
