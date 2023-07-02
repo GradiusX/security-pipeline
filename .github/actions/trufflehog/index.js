@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const outputFile = getInput('output-filename');
 const exclusionString = getInput('trufflehog-exclusion-list');
-const exclusionList = exclusionString.split();
+const exclusionList = exclusionString.split(' ');
 console.log(exclusionString);
 console.log(exclusionList);
 
