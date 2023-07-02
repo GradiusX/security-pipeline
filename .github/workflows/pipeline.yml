@@ -98,6 +98,7 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/trufflehog@dev
         with:
           output-filename: "trufflehog.json"
+          trufflehog-exclusion-list: ${{ inputs.trufflehog-exclusion-list}}
       
       - name: Uploading Trufflehog files to DefectDojo
         if: steps.check_public_repo.outputs.public_repo == 'true'
@@ -116,3 +117,5 @@ jobs:
         continue-on-error: ${{ inputs.continue-on-error }}
         id: trufflehog_specific
         uses: GradiusX/security-pipeline/.github/actions/trufflehog@dev
+        with:
+          trufflehog-exclusion-list: ${{ inputs.trufflehog-exclusion-list}}
