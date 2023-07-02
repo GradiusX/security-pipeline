@@ -4,9 +4,9 @@ on:
   workflow_call:
     inputs:
       continue-on-error:
+        description: 'Continue anyways even if a security issue is found'
         required: true
         type: boolean
-        default: false
       severity-level:
         description: 'Min Severity Level to Report'
         required: true
@@ -14,7 +14,6 @@ on:
       trufflehog-exclusion-list:
         description: 'Array of regexs to exclude'
         type: string
-        # default: "['^\\.git/.*']"
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
         type: string

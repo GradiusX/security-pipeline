@@ -4141,7 +4141,7 @@ const outputFile = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('outp
 const exclusionString = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('trufflehog-exclusion-list');
 const exclusionList = exclusionString.split();
 console.log(exclusionString);
-console.log(typeof(exclusionList));
+console.log(exclusionList);
 
 (async () => {
 
