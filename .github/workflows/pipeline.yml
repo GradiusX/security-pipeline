@@ -16,8 +16,8 @@ on:
         type: string
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
-        type: string
         required: true
+        type: string
     secrets:
       defectdojo-api-key:
         description: 'API key for Defect Dojo Instance'
