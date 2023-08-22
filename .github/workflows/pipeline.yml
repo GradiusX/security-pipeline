@@ -5,11 +5,9 @@ on:
     inputs:
       continue-on-error:
         description: 'Continue anyways even if a security issue is found'
-        required: true
         type: boolean
       severity-level:
         description: 'Min Severity Level to Report'
-        required: true
         type: string
       secrets-exclusion-list:
         description: 'Array of regexs to exclude'
