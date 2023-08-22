@@ -109,7 +109,7 @@ jobs:
           scan-type: "Trufflehog Scan"
           scan-filename: "trufflehog.json"
 
-      - name: Running Full Trufflehog on Repo
+      - name: Running Specific Trufflehog on Repo
         if: steps.check_public_repo.outputs.public_repo == 'true'
         continue-on-error: ${{ inputs.continue-on-error }}
         id: trufflehog_specific
