@@ -4,28 +4,26 @@ on:
   workflow_call:
     inputs:
       continue-on-error:
-        required: true
+        description: 'Continue anyways even if a security issue is found'
         type: boolean
-        default: false
       severity-level:
         description: 'Min Severity Level to Report'
-        required: true
         type: string
-        default: "critical"    
+      secrets-exclusion-list:
+        description: 'Array of regexs to exclude'
+        type: string
       defectdojo-url:
         description: 'URL for DefectDojo Instance eg: https://defectdojo.com'
-        type: string
         required: true
+        type: string
     secrets:
       defectdojo-api-key:
         description: 'API key for Defect Dojo Instance'
         required: true
 
-
 jobs:
   nodejs-security-checks:
     runs-on: ubuntu-latest
-    # continue-on-error: ${{ inputs.continue-on-error }}
     steps:  
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -55,7 +53,7 @@ jobs:
           defectdojo-url: ${{ inputs.defectdojo-url }}
           defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
           product-name: ${{ github.event.repository.name }}
-          engagement-name: "CICD_engagement"
+          engagement-name: "${{ github.event.repository.name }}-${{ github.run_number }}"
           scan-type: "Yarn Audit Scan"
           scan-filename: "yarn_audit.json"
 
@@ -66,3 +64,55 @@ jobs:
         uses: GradiusX/security-pipeline/.github/actions/yarn_audit@main
         with:
           severity-level: ${{ inputs.severity-level }}
+
+  secrets-security-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Public Repo Check
+        id: check_public_repo
+        run: |
+          if [ `curl -o /dev/null --silent --write-out '%{http_code}\n' https://github.com/${{ github.repository}}.git/info/refs?service=git-upload-pack` -eq 200 ];
+          then
+            echo "public_repo=true" >> $GITHUB_OUTPUT
+          else
+            echo "public_repo=false" >> $GITHUB_OUTPUT
+          fi 
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Download and Setup Latest TruffleHog
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        run: |
+          th=`curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | jq -r '.assets[] | select(.name | contains("linux_amd64")) | .browser_download_url'`
+          wget -q -O - $th | tar xz
+          mv trufflehog /usr/local/bin
+          # ignore .git folder
+
+      - name: Running Full Trufflehog on Repo
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        id: trufflehog_full
+        uses: GradiusX/security-pipeline/.github/actions/trufflehog@main
+        with:
+          output-filename: "trufflehog.json"
+          secrets-exclusion-list: ${{ inputs.secrets-exclusion-list}}
+      
+      - name: Uploading Trufflehog files to DefectDojo
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        id: upload_defectdojo_trufflehog
+        uses: GradiusX/security-pipeline/.github/actions/upload_defectdojo@main
+        with:
+          defectdojo-url: ${{ inputs.defectdojo-url }}
+          defectdojo-api-key: ${{ secrets.defectdojo-api-key }}
+          product-name: ${{ github.event.repository.name }}
+          engagement-name: "${{ github.event.repository.name }}-${{ github.run_number }}"
+          scan-type: "Trufflehog Scan"
+          scan-filename: "trufflehog.json"
+
+      - name: Running Specific Trufflehog on Repo
+        if: steps.check_public_repo.outputs.public_repo == 'true'
+        continue-on-error: ${{ inputs.continue-on-error }}
+        id: trufflehog_specific
+        uses: GradiusX/security-pipeline/.github/actions/trufflehog@main
+        with:
+          secrets-exclusion-list: ${{ inputs.secrets-exclusion-list}}

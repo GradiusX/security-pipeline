@@ -15,6 +15,9 @@ jobs:
         with:
             continue-on-error: false
             severity-level: "critical"
+            secrets-exclusion-list: >
+                ^\.git/.*
+                ^secrets_test.yaml$
             defectdojo-url: ${{ vars.DEFECTDOJO_URL }}
         secrets:
             defectdojo-api-key: ${{ secrets.DEFECTDOJO_API_KEY }}

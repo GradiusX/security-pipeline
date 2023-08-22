@@ -20,8 +20,7 @@ const scanFile = getInput('scan-filename');
         },
         formData : {
             "product_name": productName,
-            //"engagement_name": engagementName,
-            "engagement_name": productName.concat('-').concat(Date.now().toString()),
+            "engagement_name": engagementName,
             "scan_type": scanType,
             "auto_create_context": "true",
             "close_old_findings": "true",
